@@ -7,12 +7,16 @@ const QUESTIONS = [
   { id: "q1", text: "勉強は毎日コツコツしますか？" },
   { id: "q2", text: "復習はしますか？" },
   { id: "q3", text: "数学は得意ですか？" },
-];
+] as const;
+
+// 質問IDの型を定義: "q1" | "q2" | "q3"
+type QuestionId = (typeof QUESTIONS)[number]["id"];
+type AnswersState = Record<QuestionId, string>;
 
 export default function MbtiPage() {
   const router = useRouter();
 
-  const [answers, setAnswers] = useState({
+  const [answers, setAnswers] = useState<AnswersState>({
     q1: "",
     q2: "",
     q3: "",
@@ -22,12 +26,11 @@ export default function MbtiPage() {
   useEffect(() => {
     const saved = localStorage.getItem("mbtiAnswers");
     if (saved) {
-      setAnswers(JSON.parse(saved));
+      setAnswers(JSON.parse(saved) as AnswersState);
     }
   }, []);
 
-  // 選択時に LocalStorage 保存
-  const handleSelect = (qid: string, value: string) => {
+  const handleSelect = (qid: QuestionId, value: string) => {
     const newAns = { ...answers, [qid]: value };
     setAnswers(newAns);
     localStorage.setItem("mbtiAnswers", JSON.stringify(newAns));
@@ -42,7 +45,6 @@ export default function MbtiPage() {
       return;
     }
 
-    // agree が2つ以上で「コツコツタイプ」にする例
     const agreeCount = Object.values(answers).filter(
       (v) => v === "agree"
     ).length;
@@ -83,6 +85,7 @@ export default function MbtiPage() {
                 onClick={() => handleSelect(q.id, "disagree")}
                 className="flex flex-col items-center cursor-pointer"
               >
+                {/* 変更点: q.idは QuestionId 型なので、answers[q.id] はエラーになりません */}
                 <div
                   className={`w-14 h-14 rounded-full border-4 ${
                     answers[q.id] === "disagree"
