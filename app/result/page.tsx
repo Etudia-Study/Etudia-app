@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ResultPage() {
+  const router = useRouter();
   const [resultType, setResultType] = useState("");
 
   useEffect(() => {
@@ -40,7 +42,10 @@ export default function ResultPage() {
       </p>
 
       {/* ボタン */}
-      <button className="w-72 bg-blue-500 text-white text-lg py-3 rounded-full">
+      <button
+        onClick={() => router.push("/home")}
+        className="w-full bg-[#4A90E2] text-white py-4 rounded-3xl text-lg shadow-lg active:scale-95 transition max-w-md"
+      >
         学習を始める
       </button>
     </div>
