@@ -1,90 +1,83 @@
-// pages/quiz.tsx (または pages/index.js)
+"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import QuestionCard from "@/components/ui/QuestionCard"; // パスは環境に合わせて調整してください
+import QuestionCard from "@/components/ui/QuestionCard";
 
 // 💡 回答ステートの型定義
 interface AnswersState {
-  // キーは質問ID (string) で、値は回答 (string: 'A', 'B', 'C') または null
-  [key: string]: string | null;
+  [key: string]: string | null; // A / B / C / null
 }
 
-// 質問データの定義
+// 質問データ
 const questions = [
-  { id: "q1", title: "あなたは積極的に人と交流するのが好きですか？" },
-  { id: "q2", title: "物事を決める際は、論理よりも直感を優先しますか？" },
-  { id: "q3", title: "計画を立てるよりも、臨機応変に行動する方が得意ですか？" },
+  { id: "q1", title: "勉強はコツコツしますか" },
+  { id: "q2", title: "復讐はしますか" },
+  { id: "q3", title: "数学は得意ではないか" },
 ];
 
 export default function QuizPage() {
   const router = useRouter();
 
-  // 1. 回答を保存するためのステートを初期化
-  // 💡 reduceの初期値に AnswersState 型を明示的に指定してエラーを回避
+  // 回答ステートの初期化
   const initialAnswers: AnswersState = questions.reduce(
     (acc, q) => ({ ...acc, [q.id]: null }),
-    {} as AnswersState // TypeScriptに型を明示
+    {} as AnswersState
   );
 
-  // 💡 useState に AnswersState 型を渡してエラーを回避
   const [answers, setAnswers] = useState<AnswersState>(initialAnswers);
 
-  // 2. QuestionCardから呼び出される回答更新関数
-  // 💡 パラメーターに string 型を明示的に指定してエラーを回避
+  // 回答変更処理
   const handleAnswerChange = (questionId: string, choiceValue: string) => {
-    setAnswers((prevAnswers) => ({
-      ...prevAnswers,
+    setAnswers((prev) => ({
+      ...prev,
       [questionId]: choiceValue,
     }));
   };
 
-  // 3. 結果を計算し、遷移する関数
+  // 結果を計算して遷移
   const calculateResultAndRedirect = () => {
-    // 回答がすべて完了しているかチェック
     const allAnswered = questions.every((q) => answers[q.id] !== null);
-
     if (!allAnswered) {
       alert("全ての質問に回答してください！");
       return;
     }
 
-    // A, B, C のカウントロジック (簡略化した例)
+    // A/B/C をカウント
     let countA = 0;
     let countB = 0;
     let countC = 0;
 
-    // 💡 Object.values(answers) は string | null の配列になるため、
-    // nullチェックをしながらカウントします。
     Object.values(answers).forEach((answer) => {
       if (answer === "A") countA++;
-      else if (answer === "B") countB++;
-      else if (answer === "C") countC++;
+      if (answer === "B") countB++;
+      if (answer === "C") countC++;
     });
 
+    // 🔥 新しいロジック：タイプ名を変更！
     let resultType = "";
     if (countA >= countB && countA >= countC) {
-      resultType = "TYPE_ALPHA";
-    } else if (countB > countA && countB >= countC) {
-      resultType = "TYPE_BETA";
+      resultType = "勤勉タイプ";
+    } else if (countB >= countA && countB >= countC) {
+      resultType = "ひらめきタイプ";
     } else {
-      resultType = "TYPE_GAMMA";
+      resultType = "即断即決タイプ";
     }
 
-    router.push(`/result?type=${resultType}`);
+    // 遷移
+    router.push(`/result?type=${encodeURIComponent(resultType)}`);
   };
 
   return (
     <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
       <h1>MBTI風 アンケート</h1>
 
-      {/* 質問カードのレンダリング */}
+      {/* 質問カード */}
       {questions.map((q) => (
         <QuestionCard
           key={q.id}
           title={q.title}
           questionId={q.id}
-          // 💡 answers[q.id] は AnswersState 型により string | null であることが保証され、エラーが解消
           currentAnswer={answers[q.id]}
           onAnswerChange={handleAnswerChange}
         />
