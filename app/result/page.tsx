@@ -1,16 +1,37 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ResultPage() {
   const router = useRouter();
-  const [resultType, setResultType] = useState("");
+  const searchParams = useSearchParams();
+  const resultType = searchParams.get("type") || "不明";
 
-  useEffect(() => {
-    const result = localStorage.getItem("mbtiResult");
-    if (result) setResultType(result);
-  }, []);
+  // タイプごとの表示内容
+  const typeInfo: Record<
+    string,
+    { label: string; image: string }
+  > = {
+    "勤勉タイプ": {
+      label: "あなたは「勤勉タイプ」です！",
+      image: "/result_kotu.png",
+    },
+    "ひらめきタイプ": {
+      label: "あなたは「ひらめきタイプ」です！",
+      image: "/result_hirameki.png",
+    },
+    "即断即決タイプ": {
+      label: "あなたは「即断即決タイプ」です！",
+      image: "/result_sokudan.png",
+    },
+  };
+
+  // デフォルト（該当なし）
+  const display = typeInfo[resultType] || {
+    label: "結果が取得できませんでした",
+    image: "/result_default.png",
+  };
 
   return (
     <div className="flex flex-col items-center p-6 pt-10">
@@ -29,7 +50,7 @@ export default function ResultPage() {
       {/* イラスト */}
       <div className="my-6">
         <Image
-          src="/result_kotu.png"
+          src={display.image}
           alt="result-illust"
           width={260}
           height={260}
@@ -37,8 +58,8 @@ export default function ResultPage() {
       </div>
 
       {/* タイプ表示 */}
-      <p className="text-center text-lg mb-10">
-        あなたは<b>コツコツタイプ</b>です
+      <p className="text-center text-lg mb-10 font-semibold">
+        {display.label}
       </p>
 
       {/* ボタン */}

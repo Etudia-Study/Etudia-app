@@ -35,17 +35,15 @@
 //   );
 // }
 // QuestionCard.tsx
+"use client";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface Props {
   title: string;
-  // 質問の識別子（例: 'q1', 'q2'）
   questionId: string;
-  // 現在の回答の値 (選択状態を反映するため)
   currentAnswer: string | null;
-  // 親コンポーネントに回答を伝えるための関数
   onAnswerChange: (questionId: string, choiceValue: string) => void;
 }
 
@@ -55,39 +53,41 @@ export default function QuestionCard({
   currentAnswer,
   onAnswerChange,
 }: Props) {
-  // 選択肢の値 (さきほどのロジックに合わせて 'A', 'B', 'C' に変更します)
-  // 📝 ポイント: 値をロジックに合わせて意味のあるものに変更することが重要です
-  const choices = [
-    { value: "A", label: "そう思わない" },
-    { value: "B", label: "どちらでもない" },
-    { value: "C", label: "そう思う" },
-  ];
-
   return (
     <div className="bg-[#CFE2F8] rounded-3xl py-10 px-4 mb-2.5 shadow-sm">
       <p className="font-semibold mb-4">{title}</p>
 
-      {/* onValueChange: 選択された値が変更されるたびに呼び出されます */}
       <RadioGroup
-        value={currentAnswer || ""} // currentAnswerを空文字列にフォールバック
+        value={currentAnswer || ""}
         onValueChange={(value) => onAnswerChange(questionId, value)}
       >
         <div className="flex items-center justify-between">
-          {choices.map((choice) => (
-            <div
-              key={choice.value}
-              className="flex items-center flex-col space-y-2 w-[100px]"
-            >
-              {/* ⚠️ 注意: id は質問と選択肢の組み合わせでユニークにしてください */}
-              <RadioGroupItem
-                value={choice.value}
-                id={`${questionId}-${choice.value}`}
-              />
-              <Label htmlFor={`${questionId}-${choice.value}`}>
-                {choice.label}
-              </Label>
-            </div>
-          ))}
+          {/* そう思わない → A */}
+          <div className="flex items-center flex-col space-y-2 w-[100px]">
+            <RadioGroupItem
+              value="A"
+              id={`${questionId}-A`}
+            />
+            <Label htmlFor={`${questionId}-A`}>そう思わない</Label>
+          </div>
+
+          {/* どちらでもない → B */}
+          <div className="flex items-center flex-col space-y-2 w-[100px]">
+            <RadioGroupItem
+              value="B"
+              id={`${questionId}-B`}
+            />
+            <Label htmlFor={`${questionId}-B`}>どちらでもない</Label>
+          </div>
+
+          {/* そう思う → C */}
+          <div className="flex items-center flex-col space-y-2 w-[100px]">
+            <RadioGroupItem
+              value="C"
+              id={`${questionId}-C`}
+            />
+            <Label htmlFor={`${questionId}-C`}>そう思う</Label>
+          </div>
         </div>
       </RadioGroup>
     </div>
