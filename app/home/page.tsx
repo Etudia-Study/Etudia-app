@@ -13,12 +13,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#F7F9FC] px-6 py-10">
       {/* ロゴ */}
       <div className="flex justify-center mb-10">
-        <Image
-          src="/etudia-logo.png" // ←差し替えてね
-          width={120}
-          height={40}
-          alt="Étudia"
-        />
+        <Image src="/etudia-logo.png" width={120} height={40} alt="Étudia" />
       </div>
 
       {/* タイトル */}
