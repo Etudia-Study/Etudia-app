@@ -10,8 +10,14 @@ type Props = {
 const ProblemStatement: FC<Props> = ({ children }) => {
   return (
     <div>
-      <div>以下の質問に対して 最も当てはまる回答を選択してください。</div>
-      {children}
+      <div className="inline-block border px-4 py-1 rounded-full text-sm mb-4 mt-5">
+        全3問
+      </div>
+      <div className="mb-5">
+        以下の質問に対して
+        <br />
+        最も当てはまる回答を選択してください。
+      </div>
     </div>
   );
 };

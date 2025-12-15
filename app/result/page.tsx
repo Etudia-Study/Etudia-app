@@ -9,19 +9,16 @@ export default function ResultPage() {
   const resultType = searchParams.get("type") || "不明";
 
   // タイプごとの表示内容
-  const typeInfo: Record<
-    string,
-    { label: string; image: string }
-  > = {
-    "勤勉タイプ": {
+  const typeInfo: Record<string, { label: string; image: string }> = {
+    勤勉タイプ: {
       label: "あなたは「勤勉タイプ」です！",
       image: "/result_kotu.png",
     },
-    "ひらめきタイプ": {
+    ひらめきタイプ: {
       label: "あなたは「ひらめきタイプ」です！",
       image: "/result_hirameki.png",
     },
-    "即断即決タイプ": {
+    即断即決タイプ: {
       label: "あなたは「即断即決タイプ」です！",
       image: "/result_sokudan.png",
     },
@@ -58,9 +55,7 @@ export default function ResultPage() {
       </div>
 
       {/* タイプ表示 */}
-      <p className="text-center text-lg mb-10 font-semibold">
-        {display.label}
-      </p>
+      <p className="text-center text-lg mb-10 font-semibold">{display.label}</p>
 
       {/* ボタン */}
       <button

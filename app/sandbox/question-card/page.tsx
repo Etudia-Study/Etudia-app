@@ -3,17 +3,17 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import QuestionCard from "@/components/ui/QuestionCard";
-
-// 💡 回答ステートの型定義
+import ProblemStatement from "@/components/ui/ProblemStatement";
+// 回答ステートの型定義
 interface AnswersState {
   [key: string]: string | null; // A / B / C / null
 }
 
 // 質問データ
 const questions = [
-  { id: "q1", title: "勉強はコツコツしますか" },
-  { id: "q2", title: "復讐はしますか" },
-  { id: "q3", title: "数学は得意ではないか" },
+  { id: "q1", title: "勉強はコツコツしますか？" },
+  { id: "q2", title: "復習はしますか？" },
+  { id: "q3", title: "数学は得意ですか？" },
 ];
 
 export default function QuizPage() {
@@ -56,7 +56,7 @@ export default function QuizPage() {
 
     // 🔥 新しいロジック：タイプ名を変更！
     let resultType = "";
-    if (countA >= countB && countA >= countC) {
+    if (countC >= countB && countC >= countA) {
       resultType = "勤勉タイプ";
     } else if (countB >= countA && countB >= countC) {
       resultType = "ひらめきタイプ";
@@ -70,8 +70,7 @@ export default function QuizPage() {
 
   return (
     <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
-      <h1>MBTI風 アンケート</h1>
-
+      <ProblemStatement />
       {/* 質問カード */}
       {questions.map((q) => (
         <QuestionCard
@@ -86,16 +85,18 @@ export default function QuizPage() {
       <button
         onClick={calculateResultAndRedirect}
         style={{
-          padding: "10px 20px",
-          backgroundColor: "#4CAF50",
+          maxWidth: "600px",
+          padding: "20px",
+          backgroundColor: "#4A90E2",
           color: "white",
           border: "none",
-          borderRadius: "8px",
+          borderRadius: "30px",
           cursor: "pointer",
           marginTop: "20px",
+          width: "100%",
         }}
       >
-        結果を見る！
+        回答する
       </button>
     </div>
   );
