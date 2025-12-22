@@ -35,18 +35,18 @@ export default function PracticePage() {
       </section>
 
       {/* 回答するボタン */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[327px]">
+      <div className="mx-auto mt-20 w-[340px]">
         <button
           disabled={!selected || judged}
           onClick={() => setJudged(true)}
           className={`
-        w-full h-[64px] rounded-full font-bold
-        ${
-          selected
-            ? "bg-[#2C89C7] text-[#FAFBFC] shadow-[0px_4px_0px_#2371A5]"
-            : "bg-[#D9D9D9] text-[#B3B3B3] shadow-[0px_4px_0px_#B3B3B3]"
-        }
-      `}
+      w-full h-[64px] rounded-full font-bold
+      ${
+        selected
+          ? "bg-[#2C89C7] text-[#FAFBFC] shadow-[0px_4px_0px_#2371A5]"
+          : "bg-[#D9D9D9] text-[#B3B3B3] shadow-[0px_4px_0px_#B3B3B3]"
+      }
+    `}
         >
           回答する
         </button>
