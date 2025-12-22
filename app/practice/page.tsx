@@ -41,7 +41,11 @@ export default function PracticePage() {
           onClick={() => setJudged(true)}
           className={`
             w-full h-[64px] rounded-full font-bold
-            ${selected ? "bg-black text-white" : "bg-[#D9D9D9] text-[#B3B3B3]"}
+            ${
+              selected
+                ? "bg-[#2C89C7] text-[#FAFBFC] shadow-[0px_4px_0px_#2371A5]"
+                : "bg-[#D9D9D9] text-[#B3B3B3] shadow-[0px_4px_0px_#B3B3B3]"
+            }
           `}
         >
           回答する
