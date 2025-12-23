@@ -12,15 +12,15 @@ export default function ResultPage() {
   // タイプごとの表示内容
   const typeInfo: Record<string, { label: string; image: string }> = {
     勤勉タイプ: {
-      label: "あなたは「勤勉タイプ」です！",
+      label: "diligence_type",
       image: "/result_kotu.png",
     },
     ひらめきタイプ: {
-      label: "あなたは「ひらめきタイプ」です！",
+      label: "inspiration_type",
       image: "/result_hirameki1.png",
     },
     即断即決タイプ: {
-      label: "あなたは「即断即決タイプ」です！",
+      label: "QuickDecision_type",
       image: "/result_sokudan.png",
     },
   };
