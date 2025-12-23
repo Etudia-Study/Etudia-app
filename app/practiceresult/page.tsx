@@ -22,7 +22,7 @@ export default function PracticeResultPage() {
           <IoCloseSharp size={28} />
         </button>
 
-        <p className="text-sm font-medium text-[#111]">結果</p>
+        <p className="text-xl font-medium text-[#111]">結果</p>
 
         {/* 右側の余白調整用 */}
         <div className="h-[30px] w-[30px]" />
