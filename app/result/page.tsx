@@ -17,7 +17,7 @@ export default function ResultPage() {
     },
     ひらめきタイプ: {
       label: "あなたは「ひらめきタイプ」です！",
-      image: "/result_hirameki.png",
+      image: "/result_hirameki1.png",
     },
     即断即決タイプ: {
       label: "あなたは「即断即決タイプ」です！",
