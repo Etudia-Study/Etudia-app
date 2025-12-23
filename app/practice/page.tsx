@@ -51,7 +51,7 @@ export default function PracticePage() {
       </section>
 
       {/* ================= 回答 ================= */}
-      <section className="mx-auto grid w-[350px] grid-cols-2 gap-y-[50px]">
+      <section className="mx-auto grid w-[350px] grid-cols-2 gap-5">
         {ANSWERS.map((answer) => (
           <AnswerCard
             key={answer}
@@ -123,7 +123,7 @@ export default function PracticePage() {
                 ${
                   isCorrect
                     ? "bg-white text-[#2C89C7]"
-                    : "bg-[#2C89C7] text-white"
+                    : "bg-[#DB2F2F] text-white shadow-[0px_4px_0px_#9E1010]"
                 }`}
             >
               次へ進む

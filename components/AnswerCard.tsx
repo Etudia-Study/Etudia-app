@@ -12,7 +12,7 @@ export default function AnswerCard({
   onClick,
 }: AnswerCardProps) {
   const base =
-    "flex items-center justify-center h-[185px] w-[160px] rounded-[30px] text-[70px] font-bold transition";
+    "flex items-center justify-center h-[185px] w-full rounded-[30px] text-[70px] font-bold transition";
 
   const defaultStyle =
     "bg-[#EEEEEE] text-[#B3B3B3] shadow-[0px_4px_0px_#B3B3B3]";

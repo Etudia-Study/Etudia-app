@@ -1,8 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import PracticePage from "../practice/page";
 
 export default function HomePage() {
+  const router = useRouter();
   const suggestions = [
     "昨日の復習をしよう！",
     "正負の数 基礎の確認 1",
@@ -29,7 +32,10 @@ export default function HomePage() {
         ))}
 
         {/* ボタン */}
-        <button className="w-full bg-[#4A90E2] text-white py-3 rounded-3xl text-lg font-semibold active:scale-95 transition mt-4">
+        <button
+          className="w-full bg-[#4A90E2] text-white py-3 rounded-3xl text-lg font-semibold active:scale-95 transition mt-4 "
+          onClick={() => router.push("/practice")}
+        >
           学習をスタート
         </button>
       </div>
