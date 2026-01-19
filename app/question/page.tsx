@@ -68,6 +68,8 @@ export default function MbtiPage() {
           以下の質問に対して
           <br />
           最も当てはまる回答を選択してください。
+          <br />
+          あなたに合った問題を出題します。
         </p>
 
         {QUESTIONS.map((q, index) => (
