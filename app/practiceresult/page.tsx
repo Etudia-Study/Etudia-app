@@ -63,7 +63,7 @@ function PracticeResultContent() {
         </button>
 
         <button
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/home")}
           className="h-[48px] rounded-xl border border-[#DDD] text-sm font-medium text-[#111]"
         >
           ホームへ戻る
