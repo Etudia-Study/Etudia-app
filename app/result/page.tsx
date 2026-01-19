@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function ResultPage() {
+function ResultContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resultType = searchParams.get("type") || "不明";
@@ -66,5 +66,19 @@ export default function ResultPage() {
         学習を始める
       </button>
     </div>
+  );
+}
+
+export default function ResultPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <p>読み込み中...</p>
+        </div>
+      }
+    >
+      <ResultContent />
+    </Suspense>
   );
 }

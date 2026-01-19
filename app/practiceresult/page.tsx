@@ -3,8 +3,9 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { IoCloseSharp } from "react-icons/io5";
 import Image from "next/image";
+import { Suspense } from "react";
 
-export default function PracticeResultPage() {
+function PracticeResultContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const score = Number(searchParams.get("score") ?? 0);
@@ -69,5 +70,19 @@ export default function PracticeResultPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function PracticeResultPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <p>読み込み中...</p>
+        </div>
+      }
+    >
+      <PracticeResultContent />
+    </Suspense>
   );
 }
