@@ -23,7 +23,7 @@ export default function HomePage() {
       <h2 className="text-xl font-bold mb-4">今日の提案</h2>
 
       {/* カード */}
-      <div className="bg-[#CFE0F5] rounded-3xl py-10 px-4 p-6 shadow-sm">
+      <div className="bg-[#CFE0F5] rounded-3xl py-10 px-4 mb-2.5 shadow-sm">
         {suggestions.map((text, index) => (
           <div key={index} className="flex items-center mb-4">
             <span className="text-2xl mr-3">✔️</span>
